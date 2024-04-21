@@ -12,7 +12,6 @@ const AuthNavigation = () => {
       //screenOptions={{headerStyle:{backgroundColor:'gray',borderBottomWidth:5}}}
       initialRouteName={routes.Welcome}>
       <AuthStack.Screen name={routes.Welcome} component={Auth.Welcome} />
-
       <AuthStack.Screen name={routes.OnBoarding} component={Auth.OnBoarding} />
       <AuthStack.Screen
         name={routes.TermsAndConditions}
@@ -29,6 +28,14 @@ const AuthNavigation = () => {
       <AuthStack.Screen
         name={routes.VerifyPhone}
         component={Auth.VerifyPhone}
+      />
+      <AuthStack.Screen
+        name={routes.LinkRecipient}
+        component={Auth.LinkRecipient}
+      />
+      <AuthStack.Screen
+        name={routes.SetupCheckingUp}
+        component={Auth.SetupCheckingUp}
       />
       <AuthStack.Screen
         name={routes.EnableNecessaryPermissions}

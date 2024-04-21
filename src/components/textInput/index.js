@@ -65,6 +65,7 @@ const Colored = ({
   onPressIconLeft,
   placeholderTextColor,
   iconContainerStyleRight,
+  numberOfLines,
 }) => {
   return (
     <TouchableOpacity
@@ -148,6 +149,7 @@ const Colored = ({
               onBlur={onBlur}
               secureTextEntry={secureTextEntry}
               maxLength={maxLength}
+              numberOfLines={numberOfLines}
               style={[
                 appStyles.inputField,
                 {

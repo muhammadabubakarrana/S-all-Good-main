@@ -17,7 +17,7 @@ import * as TextInputs from '../../textInput';
 import * as Modals from '../../modals';
 import * as Icons from '../../icons';
 import {Pressable, StyleSheet, TouchableOpacity} from 'react-native';
-import {Buttons, Images} from '../..';
+import {Buttons, Images, Lines} from '../..';
 import Spacer from '../../spacer';
 import {Icon} from '@rneui/base';
 
@@ -177,14 +177,20 @@ export const RowButton = ({
   textStyle1,
   textStyle2,
   buttonColorPrimary,
+  iconNameLeftInput,
+  iconTypeLeftInput,
+  tintColorLeft,
 }) => {
   return (
     <Wrapper flexDirectionRow alignItemsCenter>
       <Buttons.Colored
+        iconName={iconNameLeftInput}
+        iconType={iconTypeLeftInput}
         onPress={onPress1}
         textStyle={[{color: colors.appTextColor3}, textStyle1]}
         buttonStyle={[styles.RowButton, buttonStyle1]}
         buttonColor={colors.secondary}
+        tintColor={tintColorLeft}
         text={text1}
       />
       <Spacer isSmall horizontal />
@@ -215,6 +221,9 @@ export const CustomInput = ({
   onChangeText,
   left,
   containerStyle,
+  multiline,
+  numberOfLines,
+  inputContainerStyle,
 }) => {
   return (
     <TextInputs.Colored
@@ -228,6 +237,8 @@ export const CustomInput = ({
       iconNameLeft={left && 'magnify'}
       iconTypeLeft={'material-community'}
       value={value}
+      multiline={multiline}
+      numberOfLines={numberOfLines}
       onChangeText={onChangeText}
       titleStyle={[
         {
@@ -238,12 +249,16 @@ export const CustomInput = ({
         },
         titleStyle,
       ]}
-      inputContainerStyle={{
-        borderRadius: 16,
-        borderWidth: 1,
-        borderColor: colors.grayLight,
-        backgroundColor: colors.appTextColor6,
-      }}
+      inputStyle={inputStyle}
+      inputContainerStyle={[
+        {
+          borderRadius: 16,
+          borderWidth: 1,
+          borderColor: colors.grayLight,
+          backgroundColor: colors.appTextColor6,
+        },
+        inputContainerStyle,
+      ]}
       // inputStyle={[
       //   {
       //     paddingBottom: responsiveHeight(1),
@@ -283,6 +298,9 @@ export const RowInputs = ({
   onPressIconRightFirst,
   iconNameRightFirst,
   iconTypeRightFirst,
+  onPressIconRightSecond,
+  iconNameRightSecond,
+  iconTypeRightSecond,
   iconContainerStyleRight,
 }) => {
   return (
@@ -348,6 +366,10 @@ export const RowInputs = ({
           // }}
           title={title2}
           placeholder={placeholder2 ? placeholder2 : 'Type here...'}
+          iconColorRight={colors.appTextColor3}
+          iconNameRight={iconNameRightSecond}
+          iconTypeRight={iconTypeRightSecond}
+          onPressIconRight={onPressIconRightSecond}
           iconColorLeft={iconColorLeft}
           iconTypeLeft={iconTypeLeft}
           iconNameLeft={iconNameLeft}
@@ -427,6 +449,7 @@ export const BottomModal = ({
   heading,
   para,
   paraContainerStyle,
+  showLineAfterHeading,
 }) => {
   return (
     <Modals.PopupPrimary
@@ -450,6 +473,11 @@ export const BottomModal = ({
           <Text alignTextCenter isMediumTitle>
             {heading}
           </Text>
+        )}
+        {showLineAfterHeading && (
+          <Wrapper marginVerticalBase>
+            <Lines.Horizontal style={{alignSelf: 'center'}} width={'88%'} />
+          </Wrapper>
         )}
         {SvgIcon ? (
           <Wrapper marginVerticalMedium alignItemsCenter>
@@ -477,11 +505,12 @@ export const CheckInSchedule = ({
   para,
   time,
   duration,
+  dontShowEditIcon,
 }) => {
   return (
     <Wrapper
       marginHorizontalBase
-      paddingVerticalBase
+      paddingVerticalSmall
       paddingHorizontalBase
       style={{
         backgroundColor: colors.secondary,
@@ -521,14 +550,16 @@ export const CheckInSchedule = ({
             ({duration})
           </Text>
         </Wrapper>
-        <TouchableOpacity onPress={onPressEdit}>
-          <Icon
-            size={sizes.icons.medium}
-            name={'pencil'}
-            color={colors.appTextColor3}
-            type="material-community"
-          />
-        </TouchableOpacity>
+        {!dontShowEditIcon && (
+          <TouchableOpacity onPress={onPressEdit}>
+            <Icon
+              size={sizes.icons.medium}
+              name={'pencil'}
+              color={colors.appTextColor3}
+              type="material-community"
+            />
+          </TouchableOpacity>
+        )}
       </Wrapper>
 
       <Wrapper marginVerticalSmall>
@@ -636,6 +667,20 @@ export const ArrowRightButton = ({
     </TouchableOpacity>
   );
 };
+export const RenderLineWithVerticalBase = ({
+  UpperSpaceBase,
+  LowerSpaceBase,
+  BothSpaceBase,
+}) => {
+  return (
+    <Wrapper>
+      {(UpperSpaceBase || BothSpaceBase) && <Spacer isBasic />}
+      <Lines.Horizontal style={{alignSelf: 'center'}} width={'88%'} />
+      {(LowerSpaceBase || BothSpaceBase) && <Spacer isBasic />}
+    </Wrapper>
+  );
+};
+
 const styles = StyleSheet.create({
   iconContainer: {
     position: 'absolute',
@@ -644,7 +689,7 @@ const styles = StyleSheet.create({
     zIndex: 999, // Ensure it's above other content
   },
   RowButton: {
-    width: responsiveWidth(43),
+    width: responsiveWidth(44),
     // borderColor: colors.transparent,
     marginHorizontal: 0,
   },

@@ -18,6 +18,8 @@ import {
   Welcome,
 } from './src/screens/auth';
 import {
+  AddTimeSlot,
+  EditTimeSlot,
   PurchasePlan,
   SubscriptionPlan,
   TermsOfService,
@@ -37,8 +39,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider style={{flex: 1}}>
-        <Navigation />
-        {/* <EditProfile /> */}
+        {/* <Navigation /> */}
+        <EditTimeSlot />
       </SafeAreaProvider>
     </Provider>
   );

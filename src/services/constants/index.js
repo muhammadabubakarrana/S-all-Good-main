@@ -29,6 +29,7 @@ export const routes = {
   createAccount: 'createAccount',
   NotificationTested: 'NotificationTested',
   NotificationTest: 'Notification Test',
+  SetupCheckingUp: 'Setup CheckingUp',
   //app
   bottomTab: 'bottomTab',
   home: 'home',

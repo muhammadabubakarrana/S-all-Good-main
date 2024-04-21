@@ -69,7 +69,7 @@ export default function Index() {
 
       <Wrapper marginVerticalBase>
         <Buttons.Colored
-          onPress={() => navigate(routes.app, {screen: routes.LinkRecipient})}
+          onPress={() => navigate(routes.LinkRecipient)}
           buttonColor={colors.primary}
           text={'Link Recipient'}
         />

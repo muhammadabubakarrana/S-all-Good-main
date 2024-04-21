@@ -133,7 +133,7 @@ export default function Index() {
         buttonText1={'Setup Check-in Schedule'}
         buttonText2={'Skip for now'}
         SvgIcon={appSvgs.LinkChain}
-        onPressButton1={() => console.log('first')}
+        onPressButton1={() => navigate(routes.SetupCheckingUp)}
         onPressButton2={HandleLinkRequestModal}
         toggle={HandleLinkRequestModal}
         visible={openLinkRequestModal}

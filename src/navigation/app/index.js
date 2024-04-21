@@ -26,10 +26,6 @@ const AppNavigation = () => {
       />
       <AppStack.Screen name={routes.AppSettings} component={App.AppSettings} />
       <AppStack.Screen name={routes.EditProfile} component={App.EditProfile} />
-      <AppStack.Screen
-        name={routes.LinkRecipient}
-        component={App.LinkRecipient}
-      />
     </AppStack.Navigator>
   );
 };
