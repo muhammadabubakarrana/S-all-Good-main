@@ -36,7 +36,7 @@ export default function Index() {
           {terms?.map((item, index) => {
             const {label, detail} = item;
             return (
-              <Wrapper>
+              <Wrapper key={index}>
                 <Text isRegular isBoldFont>
                   {index + 1}. {label}
                 </Text>

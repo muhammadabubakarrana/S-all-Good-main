@@ -17,6 +17,16 @@ const AppNavigation = () => {
         component={App.ChangePaymentMethod}
       />
       <AppStack.Screen
+        name={routes.ManageSubscription}
+        component={App.ManageSubscription}
+      />
+      <AppStack.Screen
+        name={routes.Notifications}
+        component={App.Notifications}
+      />
+      <AppStack.Screen name={routes.AppSettings} component={App.AppSettings} />
+      <AppStack.Screen name={routes.EditProfile} component={App.EditProfile} />
+      <AppStack.Screen
         name={routes.LinkRecipient}
         component={App.LinkRecipient}
       />

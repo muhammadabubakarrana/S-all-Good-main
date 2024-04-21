@@ -10,6 +10,7 @@ import {
   Lines,
 } from '../../../components';
 import {responsiveWidth} from '../../../services';
+import {goBack} from '../../../navigation/rootNavigation';
 
 export default function Index() {
   return (
@@ -48,7 +49,7 @@ export default function Index() {
 
           <Wrapper alignItemsCenter>
             <RowButton
-              //   onPress2={goToNextSlide}
+              onPress2={goBack}
               //   onPress1={goToPreviousSlide}
               text1={'Cancel'}
               text2={'Update'}

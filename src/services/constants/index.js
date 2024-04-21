@@ -39,12 +39,14 @@ export const routes = {
   Profile: 'Profile',
   LinkRecipient: 'Link Recipient',
   RecipientContacts: 'Recipient Contacts',
-
+  ManageSubscription: 'Manage Subscription',
   smartFoodJournal: 'smartFoodJournal',
   sprayLogs: 'sprayLogs',
   userProfile: 'userProfile',
   ChangePaymentMethod: 'ChangePaymentMethod',
-
+  EditProfile: 'Edit Profile',
+  Notifications: 'Notifications',
+  AppSettings: 'AppSettings',
   //common
   termsOfService: 'termsOfService',
   privacyPolicy: 'privacyPolicy',

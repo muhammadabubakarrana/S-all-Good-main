@@ -23,9 +23,12 @@ import {
   TermsOfService,
 } from './src/screens/common';
 import {
+  AppSettings,
   ChangePaymentMethod,
   EditProfile,
   LinkRecipient,
+  ManageSubscription,
+  Notifications,
   Profile,
   RecipientContacts,
   ScheduleCheckInTime,
@@ -34,8 +37,8 @@ export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider style={{flex: 1}}>
-        {/* <Navigation /> */}
-        <TermsOfService />
+        <Navigation />
+        {/* <EditProfile /> */}
       </SafeAreaProvider>
     </Provider>
   );

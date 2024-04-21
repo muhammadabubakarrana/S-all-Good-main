@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   Buttons,
@@ -25,8 +25,12 @@ import {navigate} from '../../../navigation/rootNavigation';
 import {Pressable, StyleSheet} from 'react-native';
 import {Icon} from '@rneui/base';
 
-export default function Index() {
+export default function Index(props) {
   const [isActiveCondition, setIsActiveCondition] = useState(null);
+  const previousScreenData = props.route.params;
+  useEffect(() => {
+    console.log(previousScreenData);
+  }, []);
 
   return (
     <Wrapper isMain style={[{}]}>
@@ -162,7 +166,9 @@ export default function Index() {
           <Spacer isMedium />
 
           <Buttons.Colored
-            onPress={() => navigate(routes.PurchasePlan)}
+            onPress={() =>
+              navigate(routes.PurchasePlan, {id: previousScreenData?.id})
+            }
             buttonColor={colors.primary}
             text={'Proceed for Payment'}
           />

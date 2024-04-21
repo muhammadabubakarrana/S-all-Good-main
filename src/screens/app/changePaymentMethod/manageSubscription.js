@@ -1,48 +1,33 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   Buttons,
-  ScrollWrappers,
   Wrapper,
   Spacer,
   Headers,
-  RowButton,
-  RowInputs,
-  CustomInput,
   Lines,
   ScrollViews,
-  BottomModal,
-  Icons,
 } from '../../../components';
 import {
   colors,
   responsiveHeight,
   responsiveWidth,
-  appSvgs,
-  sizes,
   routes,
   DummyBulletPoints,
 } from '../../../services';
 import {useHooks} from './hooks';
 import {StyleSheet} from 'react-native';
-import {goBack, navigate} from '../../../navigation/rootNavigation';
+import {navigate} from '../../../navigation/rootNavigation';
 
-export default function Index(props) {
-  const {openModal, setOpenModal, HandleOpenModal, HandleTwoScreensGoBack} =
-    useHooks();
-
-  const previousScreenData = props.route.params;
-  useEffect(() => {
-    console.log(previousScreenData);
-  }, []);
-
+export default function Index() {
+  //   const {openModal, setOpenModal} = useHooks();
   return (
     <Wrapper isMain style={[{}]}>
       <ScrollViews.KeyboardAvoiding>
         <Headers.Primary
           darkBar
           invertColors
-          title={'Purchase Plan'}
+          title={'Manage Subscription'}
           showBackArrow
           titleStyle={{
             marginLeft: responsiveWidth(4),
@@ -51,11 +36,17 @@ export default function Index(props) {
         />
         <Wrapper>
           <Spacer isBasic />
+          <Wrapper marginHorizontalBase>
+            <Text isMediumFont isRegular>
+              Current Plan
+            </Text>
+          </Wrapper>
+          <Spacer isTiny />
           <Wrapper
             marginHorizontalBase
             paddingVerticalSmall
             paddingHorizontalBase
-            style={[styles.activeBorder]}>
+            style={[styles.planBorderStyle]}>
             {/* button and text */}
 
             <Text
@@ -128,71 +119,42 @@ export default function Index(props) {
           </Wrapper>
           <Spacer isSmall />
 
-          <CustomInput title={'Card Holder Name'} />
-          <Spacer isSmall />
-
-          <CustomInput
-            title={'Card Number'}
-            placeholder={'---- ---- ---- ----'}
-          />
-          <Spacer isSmall />
-          <RowInputs
-            placeholder1={'MM / YY'}
-            placeholder2={'- - -'}
-            title1={'Card Expiry'}
-            title2={'CVC'}
-          />
-          <Spacer isMedium />
+          <Spacer isBasic />
           <Lines.Horizontal style={{alignSelf: 'center'}} width={'90%'} />
-          <Spacer isMedium />
-
-          <Wrapper alignItemsCenter>
-            <RowButton
-              onPress2={
-                previousScreenData?.id === 'isSubscribed'
-                  ? HandleTwoScreensGoBack
-                  : HandleOpenModal
-              }
-              //   onPress1={goToPreviousSlide}
-              text1={'Cancel'}
-              text2={'Purchase'}
-              buttonStyle2={{
-                backgroundColor:
-                  previousScreenData?.id === 'isSubscribed'
-                    ? colors.primary
-                    : colors.appTextColor3,
-              }}
-              // buttonColorPrimary
-            />
-          </Wrapper>
+          <Spacer isBasic />
+          <Buttons.Colored
+            onPress={() => navigate(routes.ChangePaymentMethod)}
+            buttonColor={colors.secondary}
+            text={'Change Payment Method'}
+            tintColor={colors.appTextColor3}
+          />
+          <Spacer isTiny />
+          <Buttons.Colored
+            onPress={() =>
+              navigate(routes.common, {
+                screen: routes.SubscriptionPlan,
+                params: {id: 'isSubscribed'},
+              })
+            }
+            buttonColor={colors.secondary}
+            text={'Upgrade Subscription'}
+            tintColor={colors.orangeLight}
+          />
+          <Spacer isTiny />
+          <Buttons.Colored
+            //onPress={() => navigate(routes.OnBoarding)}
+            buttonColor={colors.secondary}
+            text={'Cancel Subscription'}
+            tintColor={colors.darkRed}
+          />
         </Wrapper>
       </ScrollViews.KeyboardAvoiding>
-      <BottomModal
-        SvgIcon={appSvgs.greenTick}
-        buttonText1={'Setup Checking Up'}
-        buttonText2={'Skip for now'}
-        onPressButton1={() => navigate(routes.EnableNecessaryPermissions)}
-        onPressButton2={() => setOpenModal(false)}
-        // toggle={openModal}
-        visible={openModal}
-        paraContainerStyle={{marginHorizontal: sizes.marginHorizontal}}
-        heading={'Registration Complete'}
-        para={
-          "Your registration is complete. You're now part of the S'all Good community. Start connecting with your loved ones and ensuring their safety today."
-        }>
-        <Wrapper marginHorizontalBase marginVerticalBase>
-          <Text alignTextCenter isRegularFont isMedium>
-            Would you like to set up regular check-in notifications now to stay
-            updated on your loved ones' well-being, or skip this step for later?
-          </Text>
-        </Wrapper>
-      </BottomModal>
     </Wrapper>
   );
 }
 
 const styles = StyleSheet.create({
-  activeBorder: {
+  planBorderStyle: {
     backgroundColor: colors.primary,
     //borderColor: colors.primary,
     borderRadius: 16,

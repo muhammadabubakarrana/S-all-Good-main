@@ -1,3 +1,9 @@
+import {useState} from 'react';
+
 export function useHooks() {
-  return {};
+  const [openLogoutModal, setOpenLogoutModal] = useState(false);
+  const HandleLogoutModal = () => {
+    setOpenLogoutModal(!openLogoutModal);
+  };
+  return {HandleLogoutModal, openLogoutModal};
 }

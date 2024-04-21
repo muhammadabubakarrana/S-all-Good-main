@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Text,
   Buttons,
@@ -11,6 +11,7 @@ import {
   RowInputs,
   RowButton,
   Lines,
+  Images,
 } from '../../../components';
 import {
   responsiveFontSize,
@@ -21,8 +22,31 @@ import {
 } from '../../../services';
 import {useHooks} from './hooks';
 import {navigate} from '../../../navigation/rootNavigation';
+import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
+import Svg, {Circle} from 'react-native-svg';
+import {Icon} from '@rneui/base';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 export default function Index() {
   const {accepted, setAccepted} = useHooks();
+  const [imageUri, setImageUri] = useState(null);
+  const pickImage = async () => {
+    try {
+      let options = {
+        mediaType: 'photo',
+        presentationStyle: 'fullScreen',
+      };
+
+      const result = await launchImageLibrary(options);
+      if (!result.didCancel) {
+        //  console.log('Image URI: ', result.assets);
+        // Handle the selected image URI here
+        setImageUri(result.assets[0]);
+      }
+    } catch (error) {
+      console.error('ImagePicker error: ', error);
+    }
+  };
+  const dashPattern = [7, 2];
   return (
     <Wrapper isMain style={[{}]}>
       <ScrollViews.KeyboardAvoiding>
@@ -34,11 +58,48 @@ export default function Index() {
           borderBottomWidth
         />
         <Wrapper>
-          <Spacer isTiny />
+          <Spacer isBasic />
+          {/* Upload Image */}
+          <TouchableOpacity onPress={pickImage} style={styles.container}>
+            <Svg height="170" width="170" viewBox="0 0 100 100">
+              <Circle
+                cx="50"
+                cy="50"
+                r="45"
+                stroke="black"
+                strokeWidth=".5"
+                fill="none"
+                strokeDasharray={dashPattern.join()}
+              />
+            </Svg>
+            <Wrapper style={styles.imageView}>
+              {imageUri && (
+                <Wrapper
+                  style={{
+                    flex: 1, // Or specific dimensions
+                    borderRadius: 100, // Adjust as needed
+                    overflow: 'hidden',
+                  }}>
+                  <Wrapper
+                    isImageBackground
+                    source={imageUri}
+                    style={{
+                      width: 155,
+                      height: 155,
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}>
+                    <RenderIconAndText imageUri />
+                  </Wrapper>
+                </Wrapper>
+              )}
+              {!imageUri && <RenderIconAndText />}
+            </Wrapper>
+          </TouchableOpacity>
 
           <Spacer isMedium />
           <RowInputs title1={'First Name'} title2={'Last Name'} />
-          <Spacer isBasic />
+          <Spacer isTiny />
 
           <CustomInput
             iconTypeRight={'material-community'}
@@ -46,13 +107,13 @@ export default function Index() {
             title={'Date of birth'}
             placeholder={'Select--'}
           />
-          <Spacer isBasic />
+          <Spacer isTiny />
 
           <CustomInput
             title={'Email Address'}
             placeholder={'example@email.coms'}
           />
-          <Spacer isBasic />
+          <Spacer isTiny />
           <RowInputs
             placeholder2={'--- --- -----'}
             placeholder1={'+92 (PK)'}
@@ -85,3 +146,33 @@ export default function Index() {
     </Wrapper>
   );
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  imageView: {
+    position: 'absolute', // Position text over the circle
+  },
+});
+
+const RenderIconAndText = ({imageUri}) => {
+  return (
+    <>
+      <Icon
+        type="feather"
+        name={imageUri ? 'camera' : 'upload'}
+        color={imageUri ? colors.appTextColor6 : colors.appTextColor3}
+      />
+      <Spacer isTiny />
+      <Text
+        style={{
+          color: imageUri ? colors.appTextColor6 : colors.appTextColor3,
+        }}
+        isRegular>
+        {imageUri ? 'Change Image' : 'Upload Image'}
+      </Text>
+    </>
+  );
+};

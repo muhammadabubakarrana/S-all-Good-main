@@ -6,19 +6,12 @@ import {
   Images,
   Spacer,
   Buttons,
-  Icons,
-  Headers,
-  CustomBorderedWrapper,
-  CustomInput,
-  Lines,
   ScrollViews,
   BottomModal,
-  BorderedWrapperWithUserDetails,
   ArrowRightButton,
   RowButton,
 } from '../../../components';
 import {
-  LinkedRecipientContacts,
   ProfileTabsData,
   appImages,
   colors,
@@ -27,20 +20,12 @@ import {
   responsiveWidth,
   routes,
   sizes,
-  users,
 } from '../../../services';
 import {navigate} from '../../../navigation/rootNavigation';
 import {useHooks} from './hooks';
-import {Icon} from '@rneui/base';
-import {TouchableOpacity} from 'react-native';
 
 export default function Index() {
-  const {
-    openLinkedRecipientModal,
-    HandleLinkedRecipientModal,
-    HandleUnlinkContactModal,
-    openUnlinkContactModal,
-  } = useHooks();
+  const {HandleLogoutModal, openLogoutModal} = useHooks();
   return (
     <Wrapper isMain>
       <Spacer isStatusBarHeigt />
@@ -107,7 +92,7 @@ export default function Index() {
           </Wrapper>
 
           <Buttons.ColoredSmall
-            //onPress={onPressLink}
+            onPress={() => navigate(routes.ManageSubscription)}
             buttonStyle={{
               backgroundColor: colors.secondary,
               borderRadius: 12,
@@ -123,8 +108,13 @@ export default function Index() {
         {ProfileTabsData.map((item, index) => (
           <Wrapper key={index}>
             <ArrowRightButton
-              onPress={item.onPress}
-              // tintColor={colors.darkRed}
+              onPress={() =>
+                navigate(item.onPress, {
+                  screen:
+                    (item.id == 5 && routes.privacyPolicy) ||
+                    (item.id == 4 && routes.termsOfService),
+                })
+              }
               iconName={item.iconName}
               text={item.text}
             />
@@ -133,7 +123,7 @@ export default function Index() {
         ))}
         <Spacer isBasic />
         <ArrowRightButton
-          //  onPress={item.onPress}
+          onPress={HandleLogoutModal}
           tintColor={colors.darkRed}
           iconName={'logout'}
           text={'Logout'}
@@ -144,15 +134,17 @@ export default function Index() {
 
       {/* Logout Modal */}
       <BottomModal
-        // toggle={HandleUnlinkContactModal}
-        // visible={openUnlinkContactModal}
-        heading={'Unlink Contact?'}>
+        toggle={HandleLogoutModal}
+        visible={openLogoutModal}
+        heading={'Are you sure?'}>
+        <Spacer isBasic />
+
         <Wrapper alignItemsCenter>
           <RowButton
-            onPress2={HandleUnlinkContactModal}
-            onPress1={HandleUnlinkContactModal}
+            //  onPress2={HandleUnlinkContactModal}
+            onPress1={HandleLogoutModal}
             text1={'Cancel'}
-            text2={'Unlink'}
+            text2={'Logout'}
             buttonStyle2={{backgroundColor: colors.darkRed}}
           />
         </Wrapper>

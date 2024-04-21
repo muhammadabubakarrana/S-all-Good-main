@@ -12,6 +12,8 @@ export const colors = {
   orange: 'rgba(243, 156, 18, 1)',
   darkRed: 'rgba(231, 76, 60, 1)',
   grayLight: '#C5C5C5',
+  orangeLight: '#F39C12',
+
   ricePaper: 'rgba(255,255,255, 0.75)',
   frost: '#D8D8D8',
   cloud: 'rgba(200,200,200, 0.35)',
