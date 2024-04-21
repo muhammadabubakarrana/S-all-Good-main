@@ -24,6 +24,7 @@ const AppNavigation = () => {
         name={routes.Notifications}
         component={App.Notifications}
       />
+      <AppStack.Screen name={routes.CheckingIn} component={App.CheckingIn} />
       <AppStack.Screen name={routes.AppSettings} component={App.AppSettings} />
       <AppStack.Screen name={routes.EditProfile} component={App.EditProfile} />
     </AppStack.Navigator>

@@ -49,6 +49,14 @@ const AuthNavigation = () => {
         name={routes.NotificationTested}
         component={Auth.NotificationTested}
       />
+      <AuthStack.Screen
+        name={routes.TestingCheckIn}
+        component={Auth.TestingCheckIn}
+      />
+      <AuthStack.Screen
+        name={routes.Congratulations}
+        component={Auth.Congratulations}
+      />
       <AuthStack.Screen name={routes.signin} component={Auth.Signin} />
       <AuthStack.Screen
         name={routes.createAccount}

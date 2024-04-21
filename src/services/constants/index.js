@@ -30,6 +30,7 @@ export const routes = {
   NotificationTested: 'NotificationTested',
   NotificationTest: 'Notification Test',
   SetupCheckingUp: 'Setup CheckingUp',
+  TestingCheckIn: 'Testing CheckIn',
   //app
   bottomTab: 'bottomTab',
   home: 'home',
@@ -48,11 +49,16 @@ export const routes = {
   EditProfile: 'Edit Profile',
   Notifications: 'Notifications',
   AppSettings: 'AppSettings',
+  Congratulations: 'Congratulations',
+  RespondToCheckIn: 'Respond To CheckIn',
+  CheckingIn: 'Checking In',
   //common
   termsOfService: 'termsOfService',
   privacyPolicy: 'privacyPolicy',
   SubscriptionPlan: 'SubscriptionPlan',
   PurchasePlan: 'PurchasePlan',
+  AddTimeSlot: 'Add Time Slot',
+  EditTimeSlot: 'Edit Time Slot',
 };
 export const headers = {
   screenOptions: {

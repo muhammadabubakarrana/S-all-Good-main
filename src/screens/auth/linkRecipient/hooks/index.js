@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import {navigate} from '../../../../navigation/rootNavigation';
+import {routes} from '../../../../services';
 
 export function useHooks() {
   const [openInviteViaEmailModal, setOpenInviteViaEmailModal] = useState(false);
@@ -10,6 +12,9 @@ export function useHooks() {
   };
   const HandleLinkRequestModal = () => {
     setOpenLinkRequestModal(!openLinkRequestModal);
+  };
+  const HandleBackToSetupCheckingUp = () => {
+    navigate(routes.SetupCheckingUp);
   };
   const HandleInviteSentModal = () => {
     setOpenInviteViaEmailModal(false);
@@ -28,5 +33,6 @@ export function useHooks() {
     HandleInviteSentModal,
     openInviteSentModal,
     setOpenInviteSentModal,
+    HandleBackToSetupCheckingUp,
   };
 }

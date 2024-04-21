@@ -6,9 +6,6 @@ import {
   Images,
   Spacer,
   Buttons,
-  Icons,
-  Headers,
-  CustomBorderedWrapper,
   CustomInput,
   Lines,
   ScrollViews,
@@ -78,6 +75,7 @@ export default function Index() {
             key={index}
             item={item}
             index={index}
+            data={LinkedRecipientContacts}
           />
         ))}
         <Spacer isDoubleBase />
@@ -164,6 +162,7 @@ const ItemContainer = ({
   tintColor,
   iconSize,
   onPressIcon,
+  data,
 }) => {
   return (
     <Wrapper key={index}>

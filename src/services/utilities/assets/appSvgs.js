@@ -15,6 +15,10 @@ import inviteViaEmail from '../../../assets/svgs/inviteViaEmail.svg';
 import LinkChain from '../../../assets/svgs/LinkChain.svg';
 import linkSent from '../../../assets/svgs/linkSent.svg';
 import scheduleTime from '../../../assets/svgs/scheduleTime.svg';
+import testCheckIn from '../../../assets/svgs/testCheckIn.svg';
+import NoResponse from '../../../assets/svgs/NoResponse.svg';
+import congrats from '../../../assets/svgs/congrats.svg';
+import InvertedThumblogo from '../../../assets/svgs/InvertedThumblogo.svg';
 
 export {
   linkSent,
@@ -34,4 +38,8 @@ export {
   permisionWarn,
   inviteViaEmail,
   scheduleTime,
+  testCheckIn,
+  NoResponse,
+  congrats,
+  InvertedThumblogo,
 };

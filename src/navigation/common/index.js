@@ -26,6 +26,11 @@ export default () => {
         name={routes.PurchasePlan}
         component={Common.PurchasePlan}
       />
+      <Stack.Screen name={routes.AddTimeSlot} component={Common.AddTimeSlot} />
+      <Stack.Screen
+        name={routes.EditTimeSlot}
+        component={Common.EditTimeSlot}
+      />
     </Stack.Navigator>
   );
 };

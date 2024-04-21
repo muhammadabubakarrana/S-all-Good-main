@@ -23,7 +23,7 @@ import {
   sizes,
 } from '../../../services';
 import {useHooks} from './hooks';
-import {navigate} from '../../../navigation/rootNavigation';
+import {goBack, navigate} from '../../../navigation/rootNavigation';
 import {TextInput} from 'react-native';
 export default function Index() {
   const {accepted, setAccepted} = useHooks();
@@ -61,7 +61,7 @@ export default function Index() {
           <Wrapper alignItemsCenter>
             <RowButton
               //  onPress2={HandleUnlinkContactModal}
-              //   onPress1={HandleLogoutModal}
+              onPress1={goBack}
               text1={'Cancel'}
               text2={'Add Slot'}
               buttonStyle2={{backgroundColor: colors.primary}}

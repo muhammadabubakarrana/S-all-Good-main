@@ -180,6 +180,9 @@ export const RowButton = ({
   iconNameLeftInput,
   iconTypeLeftInput,
   tintColorLeft,
+  buttonColorLeft,
+  iconNameRight,
+  iconTypeRight,
 }) => {
   return (
     <Wrapper flexDirectionRow alignItemsCenter>
@@ -189,12 +192,14 @@ export const RowButton = ({
         onPress={onPress1}
         textStyle={[{color: colors.appTextColor3}, textStyle1]}
         buttonStyle={[styles.RowButton, buttonStyle1]}
-        buttonColor={colors.secondary}
+        buttonColor={buttonColorLeft ? buttonColorLeft : colors.secondary}
         tintColor={tintColorLeft}
         text={text1}
       />
       <Spacer isSmall horizontal />
       <Buttons.Colored
+        iconName={iconNameRight}
+        iconType={iconTypeRight}
         onPress={onPress2}
         buttonColor={buttonColorPrimary ? colors.primary : colors.appTextColor3}
         textStyle={textStyle2}
@@ -506,6 +511,7 @@ export const CheckInSchedule = ({
   time,
   duration,
   dontShowEditIcon,
+  dontShowTimeAndDuration,
 }) => {
   return (
     <Wrapper
@@ -519,48 +525,50 @@ export const CheckInSchedule = ({
         borderColor: colors.grayLight,
         marginBottom: responsiveHeight(2),
       }}>
-      <Wrapper flexDirectionRow alignItemsCenter justifyContentSpaceBetween>
-        <Wrapper flexDirectionRow alignItemsCenter>
-          <Icon
-            size={sizes.icons.medium}
-            name={'clock-outline'}
-            color={colors.appTextColor3}
-            type="material-community"
-          />
-          <Spacer horizontal isSmall />
-          <Text
-            isMediumFont
-            isMedium
-            style={[
-              {
-                color: colors.primary,
-              },
-            ]}>
-            {time}
-          </Text>
-          <Spacer horizontal isSmall />
-          <Text
-            isMediumFont
-            isRegular
-            style={[
-              {
-                color: colors.darkRed,
-              },
-            ]}>
-            ({duration})
-          </Text>
-        </Wrapper>
-        {!dontShowEditIcon && (
-          <TouchableOpacity onPress={onPressEdit}>
+      {!dontShowTimeAndDuration && (
+        <Wrapper flexDirectionRow alignItemsCenter justifyContentSpaceBetween>
+          <Wrapper flexDirectionRow alignItemsCenter>
             <Icon
               size={sizes.icons.medium}
-              name={'pencil'}
+              name={'clock-outline'}
               color={colors.appTextColor3}
               type="material-community"
             />
-          </TouchableOpacity>
-        )}
-      </Wrapper>
+            <Spacer horizontal isSmall />
+            <Text
+              isMediumFont
+              isMedium
+              style={[
+                {
+                  color: colors.primary,
+                },
+              ]}>
+              {time}
+            </Text>
+            <Spacer horizontal isSmall />
+            <Text
+              isMediumFont
+              isRegular
+              style={[
+                {
+                  color: colors.darkRed,
+                },
+              ]}>
+              ({duration})
+            </Text>
+          </Wrapper>
+          {!dontShowEditIcon && (
+            <TouchableOpacity onPress={onPressEdit}>
+              <Icon
+                size={sizes.icons.medium}
+                name={'pencil'}
+                color={colors.appTextColor3}
+                type="material-community"
+              />
+            </TouchableOpacity>
+          )}
+        </Wrapper>
+      )}
 
       <Wrapper marginVerticalSmall>
         <Text isTinyTitle>{heading}</Text>
@@ -667,6 +675,120 @@ export const ArrowRightButton = ({
     </TouchableOpacity>
   );
 };
+export const RenderCirclesWithImage = ({img}) => {
+  return (
+    <Wrapper marginVerticalSmall alignItemsCenter>
+      <Wrapper style={styles.circleContainer}>
+        <Wrapper
+          style={[
+            styles.circle,
+            {
+              width: responsiveWidth(45),
+              height: responsiveWidth(45),
+              borderRadius: 90,
+              borderWidth: 0.5,
+            },
+          ]}
+        />
+        <Wrapper
+          style={[
+            styles.circle,
+            {
+              width: responsiveWidth(35),
+              height: responsiveWidth(35),
+              borderRadius: 70,
+              borderWidth: 0.7,
+            },
+          ]}
+        />
+        <Wrapper
+          style={[
+            styles.circle,
+            {
+              width: responsiveWidth(27),
+              height: responsiveWidth(27),
+              borderRadius: 60,
+              borderWidth: 0.8,
+            },
+          ]}
+        />
+
+        <Images.Round
+          source={{uri: img}}
+          style={styles.image}
+          // size={sizes.images.logo}
+        />
+      </Wrapper>
+    </Wrapper>
+  );
+};
+export const RenderResponseRecievedImage = ({img, txt, bgColor}) => {
+  return (
+    <Wrapper alignItemsCenter marginVerticalMedium>
+      <Images.Round source={{uri: img}} size={responsiveFontSize(130)} />
+      <Wrapper
+        paddingHorizontalSmall
+        paddingVerticalSmall
+        style={{borderRadius: sizes.cardRadius, marginTop: -10}}
+        backgroundColor={bgColor ? bgColor : colors.primary}>
+        <Text isMedium isWhite>
+          {txt}
+        </Text>
+      </Wrapper>
+    </Wrapper>
+  );
+};
+// export const ItemContainer = ({
+//   item,
+//   index,
+//   iconName,
+//   iconType,
+//   iconStyle,
+//   tintColor,
+//   iconSize,
+//   onPressIcon,
+//   data,
+//   showTimeAtBottom,
+//   dontShowOpacityIn2ndTxt,
+// }) => {
+//   return (
+//     <Wrapper key={index}>
+//       <Lines.Horizontal />
+//       <Wrapper
+//         justifyContentSpaceBetween
+//         flexDirectionRow
+//         alignItemsCenter
+//         paddingHorizontalBase
+//         paddingVerticalSmall>
+//         <Wrapper flexDirectionRow alignItemsCenter>
+//           <Images.Round source={{uri: item.image}} />
+//           <Spacer horizontal isBasic />
+//           <Wrapper>
+//             <Text isMediumFont isMedium>
+//               {item.name}
+//             </Text>
+//             <Text
+//               style={{opacity: dontShowOpacityIn2ndTxt ? 0 : 0.75}}
+//               isRegular>
+//               {item.userId}
+//             </Text>
+//           </Wrapper>
+//         </Wrapper>
+
+//         <TouchableOpacity onPress={onPressIcon}>
+//           <Icon
+//             name={iconName ? iconName : 'dots-vertical'}
+//             type={iconType ? iconType : 'material-community'}
+//             size={iconSize ? iconSize : responsiveFontSize(25)}
+//             color={tintColor ? tintColor : colors.appTextColor3}
+//             iconStyle={[iconStyle]}
+//           />
+//         </TouchableOpacity>
+//       </Wrapper>
+//       {index === data.length - 1 && <Lines.Horizontal />}
+//     </Wrapper>
+//   );
+// };
 export const RenderLineWithVerticalBase = ({
   UpperSpaceBase,
   LowerSpaceBase,
@@ -692,5 +814,23 @@ const styles = StyleSheet.create({
     width: responsiveWidth(44),
     // borderColor: colors.transparent,
     marginHorizontal: 0,
+  },
+  circleContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: responsiveWidth(60), // Height of the largest circle
+    width: 250, // Width of the largest circle
+  },
+  circle: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: colors.primary, // Change the border color as needed
+    borderWidth: 1, // Adjust the border width as needed
+  },
+  image: {
+    width: responsiveWidth(20), // Fill the container
+    height: responsiveWidth(20), // Fill the container
+    borderRadius: 50, // Half the size of the smallest circle
   },
 });

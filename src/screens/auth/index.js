@@ -4,6 +4,8 @@ import CreateAccount from './createAccount';
 import Welcome from './welcome';
 import LinkRecipient from './linkRecipient';
 import SetupCheckingUp from './SetupCheckingUp';
+import TestingCheckIn from './testingCheckIn';
+import Congratulations from './testingCheckIn/congratulations';
 
 import OnBoarding from './onBoarding';
 import NotificationTest from './notificationTest';
@@ -15,6 +17,7 @@ import VerifyEmail from './createAccount/verifyEmail';
 import VerifyPhone from './createAccount/verifyPhone';
 
 export {
+  TestingCheckIn,
   SetupCheckingUp,
   Splash,
   Signin,
@@ -29,4 +32,5 @@ export {
   NotificationTested,
   EnableNecessaryPermissions,
   LinkRecipient,
+  Congratulations,
 };

@@ -141,7 +141,7 @@ export default function Index() {
 
         <Wrapper alignItemsCenter>
           <RowButton
-            //  onPress2={HandleUnlinkContactModal}
+            onPress2={() => navigate(routes.auth)}
             onPress1={HandleLogoutModal}
             text1={'Cancel'}
             text2={'Logout'}

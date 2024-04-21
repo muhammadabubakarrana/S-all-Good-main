@@ -26,10 +26,10 @@ import {
   sizes,
 } from '../../../services';
 import {useHooks} from './hooks';
-import {navigate} from '../../../navigation/rootNavigation';
+import {goBack, navigate} from '../../../navigation/rootNavigation';
 import {TextInput} from 'react-native';
 export default function Index() {
-  const {accepted, setAccepted} = useHooks();
+  const {openDeleteModal, HandleDeleteModal} = useHooks();
   return (
     <Wrapper isMain style={[{}]}>
       <ScrollViews.KeyboardAvoiding>
@@ -64,8 +64,8 @@ export default function Index() {
               iconTypeLeftInput={'material-community'}
               tintColorLeft={colors.darkRed}
               textStyle1={{color: colors.darkRed}}
-              //  onPress2={HandleUnlinkContactModal}
-              //   onPress1={HandleLogoutModal}
+              onPress2={goBack}
+              onPress1={HandleDeleteModal}
               text1={'Delete'}
               text2={'Update'}
               buttonStyle2={{backgroundColor: colors.primary}}
@@ -78,8 +78,8 @@ export default function Index() {
       </ScrollViews.KeyboardAvoiding>
       {/* Logout Modal */}
       <BottomModal
-        //   toggle={HandleLogoutModal}
-        // visible={true}
+        toggle={HandleDeleteModal}
+        visible={openDeleteModal}
         showLineAfterHeading
         para={'Do you really want to delete this time slot?'}
         heading={'Delete Time Slot'}>
@@ -96,8 +96,8 @@ export default function Index() {
         <RenderLineWithVerticalBase LowerSpaceBase />
         <Wrapper alignItemsCenter>
           <RowButton
-            //  onPress2={HandleUnlinkContactModal}
-            //  onPress1={HandleLogoutModal}
+            onPress2={HandleDeleteModal}
+            onPress1={HandleDeleteModal}
             text1={'Cancel'}
             text2={'Delete'}
             buttonStyle2={{backgroundColor: colors.darkRed}}

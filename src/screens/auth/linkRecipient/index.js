@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Wrapper,
   Text,
@@ -25,10 +25,10 @@ import {
   sizes,
   users,
 } from '../../../services';
-import {navigate} from '../../../navigation/rootNavigation';
+import {goBack, navigate} from '../../../navigation/rootNavigation';
 import {useHooks} from './hooks';
 
-export default function Index() {
+export default function Index({route, navigation}) {
   const {
     openInviteViaEmailModal,
     setOpenInviteViaEmailModal,
@@ -38,13 +38,16 @@ export default function Index() {
     HandleLinkRequestModal,
     HandleInviteSentModal,
     openInviteSentModal,
+    HandleBackToSetupCheckingUp,
   } = useHooks();
+  const b = route.params;
+
   return (
     <Wrapper isMain>
       <Headers.Primary
         darkBar
         invertColors
-        title={'Link Recipient'}
+        title={b?.type == 'linkViewer' ? 'Link Viewer' : 'Link Recipient'}
         showBackArrow
         titleStyle={{
           marginLeft: responsiveWidth(4),
@@ -86,7 +89,11 @@ export default function Index() {
         <Spacer isTiny />
         {users.map((item, index) => (
           <ItemContainer
-            onPressLink={() => setOpenLinkRequestModal(true)}
+            onPressLink={
+              b?.type == 'linkViewer'
+                ? HandleBackToSetupCheckingUp
+                : HandleLinkRequestModal
+            }
             key={index}
             item={item}
             index={index}

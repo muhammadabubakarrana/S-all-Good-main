@@ -91,8 +91,8 @@ export default function BottomTabNavigation() {
           })}
         />
         <BottomTabStack.Screen
-          name={routes.community}
-          component={App.Community}
+          name={routes.RespondToCheckIn}
+          component={App.RespondToCheckIn}
           options={() => ({
             tabBarShowLabel: false,
 

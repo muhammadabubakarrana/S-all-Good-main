@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Wrapper,
   Text,
@@ -11,6 +11,7 @@ import {
   CustomBorderedWrapper,
   ScrollViews,
   CheckInSchedule,
+  BottomModal,
 } from '../../../components';
 import {
   appImages,
@@ -27,12 +28,14 @@ import {Icon} from '@rneui/base';
 import {Pressable, StyleSheet, TouchableOpacity} from 'react-native';
 import {useHooks} from './hooks';
 
-export default function Index() {
-  const [isNotificationsEnable, setIsNotificationsEnable] = useState(false);
-  const [isAllowCalls, setIsAllowCalls] = useState(false);
-  const [isAllowContactAccess, setIsAllowContactAccess] = useState(false);
-  const [isAllowLocation, setIsAllowLocation] = useState(false);
-  const {DummyCheckIn} = useHooks();
+export default function Index(props) {
+  const {
+    DummyCheckIn,
+    HandleTestCheckInModal,
+    openTestCheckInModal,
+    HandleShow,
+    show,
+  } = useHooks();
 
   return (
     <Wrapper isMain>
@@ -71,26 +74,36 @@ export default function Index() {
           image={appImages.user1}
         />
         <Spacer isSmall />
-        <RecipientOrView
-          name={'Kathy Pacheco'}
-          userName={'BenjaminWilson87'}
-          isViewer
-          // buttonText={'Recipient'}
-          iconColor={colors.darkRed}
-          image={appImages.user5}
-        />
-        <Spacer isSmall />
-        <Buttons.Bordered
-          //  onPress={() => setOpenInviteViaEmailModal(true)}
-          iconName={'eye'}
-          tintColor={colors.appTextColor3}
-          buttonStyle={{borderStyle: 'dashed', borderRadius: 48}}
-          // buttonColor={colors.appTextColor3}
-          text={'Link Viewer'}
-        />
+        {!show && (
+          <RecipientOrView
+            onPressIcon={HandleShow}
+            name={'Kathy Pacheco'}
+            userName={'BenjaminWilson87'}
+            isViewer
+            // buttonText={'Recipient'}
+            iconColor={colors.darkRed}
+            image={appImages.user5}
+          />
+        )}
+
+        {show && (
+          <>
+            <Spacer isSmall />
+            <Buttons.Bordered
+              onPress={() =>
+                navigate(routes.LinkRecipient, {type: 'linkViewer'})
+              }
+              iconName={'eye'}
+              tintColor={colors.appTextColor3}
+              buttonStyle={{borderStyle: 'dashed', borderRadius: 48}}
+              // buttonColor={colors.appTextColor3}
+              text={'Link Viewer'}
+            />
+          </>
+        )}
         <Spacer isBasic />
         <Buttons.Bordered
-          //  onPress={() => setOpenInviteViaEmailModal(true)}
+          onPress={() => navigate(routes.common, {screen: routes.AddTimeSlot})}
           iconName={'alarm-plus'}
           tintColor={colors.appTextColor3}
           buttonStyle={{borderStyle: 'dashed'}}
@@ -99,9 +112,12 @@ export default function Index() {
         />
         <Spacer isBasic />
         {DummyCheckIn.map((item, index) => {
-          const {onPressEdit, heading, para, time, duration} = item;
+          const {heading, para, time, duration} = item;
           return (
             <CheckInSchedule
+              onPressEdit={() =>
+                navigate(routes.common, {screen: routes.EditTimeSlot})
+              }
               key={index}
               heading={heading}
               para={para}
@@ -113,7 +129,7 @@ export default function Index() {
         <Spacer isSmall />
 
         <Buttons.Colored
-          //  onPress={() => navigate(routes.NotificationTest)}
+          onPress={HandleTestCheckInModal}
           buttonColor={colors.primary}
           text={'Continue'}
         />
@@ -121,15 +137,25 @@ export default function Index() {
         {/* checkIn wrapper */}
         <Spacer isMedium />
       </ScrollViews.WithKeyboardAvoidingView>
+      {/* Test Check-in Modal */}
+      <BottomModal
+        buttonText1={'Test Check-in with John'}
+        buttonText2={'Skip for now'}
+        SvgIcon={appSvgs.testCheckIn}
+        onPressButton1={() => navigate(routes.TestingCheckIn)}
+        onPressButton2={HandleTestCheckInModal}
+        toggle={HandleTestCheckInModal}
+        visible={openTestCheckInModal}
+        paraContainerStyle={{marginHorizontal: sizes.marginHorizontal}}
+        heading={'Test Check-In'}
+        para={
+          'Would you like to conduct a test check-in to ensure everything works properly between you and your loved ones?'
+        }>
+        <Spacer isBasic />
+      </BottomModal>
     </Wrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  lineThroughText: {
-    textDecorationLine: 'line-through',
-  },
-});
 
 const RecipientOrView = ({
   name,
