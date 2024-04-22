@@ -33,7 +33,7 @@ export default function Index() {
       <Headers.Primary
         darkBar
         invertColors
-        title={'Testing Check-In'}
+        title={'Respond to Check-in'}
         showBackArrow
         isClose
         borderBottomWidth
@@ -75,7 +75,7 @@ export default function Index() {
             />
           </TouchableOpacity>
         </Wrapper>
-        <RenderButtons onPressLowerBtn={{}} />
+        <RenderButtons />
         <Spacer isMedium />
       </ScrollViews.WithKeyboardAvoidingView>
 

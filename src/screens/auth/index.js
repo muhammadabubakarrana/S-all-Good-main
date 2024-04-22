@@ -3,6 +3,8 @@ import Signin from './signin';
 import CreateAccount from './createAccount';
 import Welcome from './welcome';
 import LinkRecipient from './linkRecipient';
+import LinkViewer from './linkViewer';
+
 import SetupCheckingUp from './SetupCheckingUp';
 import TestingCheckIn from './testingCheckIn';
 import Congratulations from './testingCheckIn/congratulations';
@@ -33,4 +35,5 @@ export {
   EnableNecessaryPermissions,
   LinkRecipient,
   Congratulations,
+  LinkViewer,
 };

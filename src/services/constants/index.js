@@ -33,13 +33,10 @@ export const routes = {
   TestingCheckIn: 'Testing CheckIn',
   //app
   bottomTab: 'bottomTab',
-  home: 'home',
-  account: 'account',
-  shop: 'shop',
-  community: 'community',
-  postDetail: 'postDetail',
   Profile: 'Profile',
   LinkRecipient: 'Link Recipient',
+  LinkViewer: 'Link Viewer',
+
   RecipientContacts: 'Recipient Contacts',
   ManageSubscription: 'Manage Subscription',
   smartFoodJournal: 'smartFoodJournal',
@@ -52,6 +49,7 @@ export const routes = {
   Congratulations: 'Congratulations',
   RespondToCheckIn: 'Respond To CheckIn',
   CheckingIn: 'Checking In',
+  Dashboard: 'Dashboard',
   //common
   termsOfService: 'termsOfService',
   privacyPolicy: 'privacyPolicy',

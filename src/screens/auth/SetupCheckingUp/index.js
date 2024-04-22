@@ -90,9 +90,7 @@ export default function Index(props) {
           <>
             <Spacer isSmall />
             <Buttons.Bordered
-              onPress={() =>
-                navigate(routes.LinkRecipient, {type: 'linkViewer'})
-              }
+              onPress={() => navigate(routes.LinkViewer)}
               iconName={'eye'}
               tintColor={colors.appTextColor3}
               buttonStyle={{borderStyle: 'dashed', borderRadius: 48}}

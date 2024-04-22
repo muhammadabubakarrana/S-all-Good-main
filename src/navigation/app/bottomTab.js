@@ -67,8 +67,8 @@ export default function BottomTabNavigation() {
           ...tabs.tabBarOptions,
         }}>
         <BottomTabStack.Screen
-          name={routes.home}
-          component={App.Home}
+          name={routes.Dashboard}
+          component={App.Dashboard}
           options={() => ({
             tabBarShowLabel: false,
 

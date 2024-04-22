@@ -11,7 +11,7 @@ const AppNavigation = () => {
       screenOptions={{headerShown: false}}
       initialRouteName={routes.home}>
       <AppStack.Screen name={routes.bottomTab} component={BottomTab} />
-      <AppStack.Screen name={routes.postDetail} component={App.PostDetail} />
+
       <AppStack.Screen
         name={routes.ChangePaymentMethod}
         component={App.ChangePaymentMethod}

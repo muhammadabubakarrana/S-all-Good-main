@@ -40,13 +40,14 @@ export default function Index({route, navigation}) {
     openInviteSentModal,
     HandleBackToSetupCheckingUp,
   } = useHooks();
+  //  const b = route.params;
 
   return (
     <Wrapper isMain>
       <Headers.Primary
         darkBar
         invertColors
-        title={'Link Recipient'}
+        title={'Link Viewer'}
         showBackArrow
         titleStyle={{
           marginLeft: responsiveWidth(4),
@@ -88,7 +89,7 @@ export default function Index({route, navigation}) {
         <Spacer isTiny />
         {users.map((item, index) => (
           <ItemContainer
-            onPressLink={HandleLinkRequestModal}
+            onPressLink={HandleBackToSetupCheckingUp}
             key={index}
             item={item}
             index={index}

@@ -13,6 +13,11 @@ const AuthNavigation = () => {
       initialRouteName={routes.Welcome}>
       <AuthStack.Screen name={routes.Welcome} component={Auth.Welcome} />
       <AuthStack.Screen name={routes.OnBoarding} component={Auth.OnBoarding} />
+      <AuthStack.Screen name={routes.signin} component={Auth.Signin} />
+      <AuthStack.Screen
+        name={routes.createAccount}
+        component={Auth.CreateAccount}
+      />
       <AuthStack.Screen
         name={routes.TermsAndConditions}
         component={Auth.TermsAndConditions}
@@ -33,6 +38,7 @@ const AuthNavigation = () => {
         name={routes.LinkRecipient}
         component={Auth.LinkRecipient}
       />
+      <AuthStack.Screen name={routes.LinkViewer} component={Auth.LinkViewer} />
       <AuthStack.Screen
         name={routes.SetupCheckingUp}
         component={Auth.SetupCheckingUp}
@@ -56,11 +62,6 @@ const AuthNavigation = () => {
       <AuthStack.Screen
         name={routes.Congratulations}
         component={Auth.Congratulations}
-      />
-      <AuthStack.Screen name={routes.signin} component={Auth.Signin} />
-      <AuthStack.Screen
-        name={routes.createAccount}
-        component={Auth.CreateAccount}
       />
     </AuthStack.Navigator>
   );
