@@ -67,8 +67,8 @@ export default function Index() {
         </Wrapper>
         <Spacer isBasic />
         <RenderButtons
-          onPressLowerBtn={HandleResponseRecievedModal}
-          onPressUpperBtn={HandleNoResponseModal}
+          onPressUpperBtn={HandleResponseRecievedModal}
+          onPressLowerBtn={HandleNoResponseModal}
         />
         <Spacer isMedium />
       </ScrollViews.WithKeyboardAvoidingView>
@@ -87,7 +87,7 @@ export default function Index() {
         <RenderButtons
           LowerBtnTxt={'Try Again for 5 minutes'}
           onPressUpperBtn={HandleNoResponseModal}
-          onPressLowerBtn={HandleResponseRecievedModal}
+          onPressLowerBtn={HandleNoResponseModal}
           onPressLowestBtn={HandleNoResponseModal}
         />
         <Spacer isDoubleBase />
@@ -135,7 +135,7 @@ const RenderButtons = ({
       />
       <Spacer isSmall />
       <Buttons.Colored
-        onPress={onPressUpperBtn}
+        onPress={onPressLowerBtn}
         buttonColor={colors.secondary}
         text={LowerBtnTxt ? LowerBtnTxt : 'Send Notification Again'}
         tintColor={colors.appTextColor3}

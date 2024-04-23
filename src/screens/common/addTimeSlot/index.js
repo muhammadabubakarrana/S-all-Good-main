@@ -32,14 +32,14 @@ export default function Index({route}) {
 
   return (
     <Wrapper isMain style={[{}]}>
+      <Headers.Primary
+        darkBar
+        invertColors
+        title={'Add Time Slot'}
+        showBackArrow
+        borderBottomWidth
+      />
       <ScrollViews.KeyboardAvoiding>
-        <Headers.Primary
-          darkBar
-          invertColors
-          title={'Add Time Slot'}
-          showBackArrow
-          borderBottomWidth
-        />
         <Wrapper>
           <Spacer isBasic />
           <CustomInput title={'Check In Title'} />

@@ -30,14 +30,14 @@ export default function Index({route}) {
   const previousScreenData = route.params;
   return (
     <Wrapper isMain style={[{}]}>
+      <Headers.Primary
+        darkBar
+        invertColors
+        title={'Edit Time Slot'}
+        showBackArrow
+        borderBottomWidth
+      />
       <ScrollViews.KeyboardAvoiding>
-        <Headers.Primary
-          darkBar
-          invertColors
-          title={'Edit Time Slot'}
-          showBackArrow
-          borderBottomWidth
-        />
         <Wrapper>
           <Spacer isBasic />
           <CustomInput title={'Check In Title'} />

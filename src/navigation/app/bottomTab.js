@@ -17,7 +17,16 @@ const BottomTabStack = createBottomTabNavigator();
 export default function BottomTabNavigation() {
   const tabIconSize = responsiveFontSize(25);
 
-  const TabIcon = ({color, iconName, iconType, size, focused, image, text}) => {
+  const TabIcon = ({
+    color,
+    iconName,
+    iconType,
+    size,
+    focused,
+    image,
+    text,
+    style,
+  }) => {
     return (
       <Wrapper
         alignItemsCenter
@@ -26,17 +35,20 @@ export default function BottomTabNavigation() {
         //justifyContentCenter
         paddingVerticalSmall
         paddingHorizontalSmall
-        style={{
-          //    flex: 1,
-          //   borderTopWidth: 3.5,
-          //   borderTopColor: !focused ? colors.appColor1 : colors.appBgColor1,
-          //   width: focused ? responsiveWidth(30) : responsiveWidth(12),
-          // justifyContent: 'center',
-          //   marginTop: 0,
-          //  height: sizes.smallButtonHeight,
-          backgroundColor: focused ? colors.primary : null,
-          borderRadius: sizes.cardRadius,
-        }}>
+        style={[
+          {
+            //    flex: 1,
+            //   borderTopWidth: 3.5,
+            //   borderTopColor: !focused ? colors.appColor1 : colors.appBgColor1,
+            width: focused ? responsiveWidth(30) : responsiveWidth(12),
+            // justifyContent: 'center',
+            //   marginTop: 0,
+            //  height: sizes.smallButtonHeight,
+            backgroundColor: focused ? colors.primary : null,
+            borderRadius: sizes.cardRadius,
+          },
+          style,
+        ]}>
         {!image ? (
           <Icon
             name={iconName}

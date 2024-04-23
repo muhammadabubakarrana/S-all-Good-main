@@ -1,4 +1,6 @@
 import {useState} from 'react';
+import {navigate} from '../../../../navigation/rootNavigation';
+import {routes} from '../../../../services';
 
 export function useHooks() {
   const [mode, setMode] = useState('Today');
@@ -10,9 +12,16 @@ export function useHooks() {
   const HandleNoResponseModal = () => {
     setOpenNoResponseModal(!openNoResponseModal);
   };
+  const GoToCheckInSchedule = () => {
+    setCheckInInfoModal(false);
+    navigate(routes.CheckInSchedule);
+  };
   const HandleResponseRecievedModal = () => {
     setOpenNoResponseModal(false);
     setOpenResponseRecievedModal(!openResponseRecievedModal);
+    setTimeout(() => {
+      setOpenResponseRecievedModal(false);
+    }, 2000);
   };
   const HandleOpenCheckInModal = () => {
     setCheckInInfoModal(!openCheckInInfoModal);
@@ -49,5 +58,6 @@ export function useHooks() {
     openNoResponseModal,
     HandleResponseRecievedModal,
     openResponseRecievedModal,
+    GoToCheckInSchedule,
   };
 }

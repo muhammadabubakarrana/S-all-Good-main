@@ -29,8 +29,14 @@ import {Icon} from '@rneui/base';
 import {TouchableOpacity} from 'react-native';
 
 export default function Index() {
-  const {mode, HandleMode, HandleOpenCheckInModal, openCheckInInfoModal, data} =
-    useHooks();
+  const {
+    mode,
+    HandleMode,
+    HandleOpenCheckInModal,
+    openCheckInInfoModal,
+    data,
+    GoToCheckInSchedule,
+  } = useHooks();
 
   return (
     <Wrapper isMain>
@@ -51,7 +57,7 @@ export default function Index() {
           </Text>
         </Wrapper>
         <Spacer isTiny />
-
+        {/* Row Buttons as heading */}
         <Wrapper marginHorizontalBase flexDirectionRow alignItemsCenter>
           {mode === 'Today' ? (
             <Buttons.ColoredSmall
@@ -93,18 +99,23 @@ export default function Index() {
         </Wrapper>
         <Spacer isSmall />
         <Wrapper
+          marginHorizontalBase
           justifyContentCenter
           alignItemsCenter
-          flexDirectionRow
-          marginHorizontalBase>
+          flexDirectionRow>
           {data.map((item, index) => (
             <Wrapper
               backgroundColor={colors.secondary}
               paddingHorizontalMedium
               paddingVerticalSmall
-              style={{borderRadius: 12, marginRight: responsiveWidth(1)}}
+              style={{
+                borderRadius: 12,
+                marginRight: index == 2 ? null : responsiveWidth(1),
+              }}
               key={index}>
-              <Wrapper alignItemsCenter paddingHorizontalTiny>
+              <Wrapper
+                alignItemsCenter
+                style={{paddingHorizontal: responsiveWidth(2)}}>
                 <Text
                   isBoldFont
                   style={{
@@ -177,7 +188,7 @@ export default function Index() {
         />
         <Spacer isTiny />
         <ArrowRightButton
-          onPress={() => navigate(routes.CheckInSchedule)}
+          onPress={GoToCheckInSchedule}
           text={'Edit Check-in Schedule'}
         />
         <Spacer isTiny />
