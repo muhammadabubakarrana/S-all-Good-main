@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Wrapper,
   Text,
@@ -10,17 +10,22 @@ import {
 } from '../../../components';
 import {
   LinkedRecipientContacts,
-  RespondToCheckIn,
+  RespondToCheckInData,
+  appFonts,
   colors,
+  fontSizes,
   responsiveFontSize,
   routes,
+  sizes,
 } from '../../../services';
 import {navigate} from '../../../navigation/rootNavigation';
 import {useHooks} from './hooks';
 import {Icon} from '@rneui/base';
 import {TouchableOpacity} from 'react-native';
+import SwitchSelector from 'react-native-switch-selector';
 
 export default function Index() {
+  const [mode, setMode] = useState('Upcoming');
   return (
     <Wrapper isMain>
       <Spacer isStatusBarHeigt />
@@ -33,20 +38,45 @@ export default function Index() {
           </Text>
         </Wrapper>
 
-        <Spacer isBasic />
+        <Wrapper marginHorizontalBase>
+          <SwitchSelector
+            options={[
+              {
+                label: 'Upcoming',
+                value: 'Upcoming',
+                activeColor: colors.appTextColor3,
+              },
+              {
+                label: 'Missed Alerts',
+                value: 'Missed Alerts',
+                activeColor: colors.appTextColor3,
+              },
+            ]}
+            initial={0}
+            style={{width: '75%'}}
+            // height={sizes.buttonHeight}
 
-        <Spacer isBasic />
-
-        {RespondToCheckIn.map((item, index) => (
-          <ItemContainer
-            onPressItem={() => navigate(routes.CheckingIn)}
-            key={index}
-            item={item}
-            index={index}
-            data={LinkedRecipientContacts}
-            iconName={'chevron-right'}
+            fontSize={fontSizes.medium}
+            selectedTextColor={colors.appTextColor6}
+            textStyle={{opacity: 0.6, fontFamily: appFonts.appTextMedium}}
+            backgroundColor={colors.secondary}
+            onPress={value => setMode(value)}
           />
-        ))}
+        </Wrapper>
+        <Spacer isBasic />
+
+        {RespondToCheckInData.map((item, index) =>
+          mode === 'Upcoming' ? (
+            <ItemContainer
+              key={index}
+              item={item}
+              index={index}
+              data={LinkedRecipientContacts}
+              iconName={'chevron-right'}
+              onPressItem={() => navigate(routes.CheckingInRespond)}
+            />
+          ) : null,
+        )}
         <Spacer isDoubleBase />
         <Spacer isDoubleBase />
         <Spacer isDoubleBase />

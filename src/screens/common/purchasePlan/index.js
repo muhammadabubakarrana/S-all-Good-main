@@ -32,10 +32,6 @@ export default function Index(props) {
     useHooks();
 
   const previousScreenData = props.route.params;
-  useEffect(() => {
-    console.log(previousScreenData);
-  }, []);
-
   return (
     <Wrapper isMain style={[{}]}>
       <ScrollViews.KeyboardAvoiding>

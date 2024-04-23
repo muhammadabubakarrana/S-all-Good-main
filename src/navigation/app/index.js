@@ -25,6 +25,14 @@ const AppNavigation = () => {
         component={App.Notifications}
       />
       <AppStack.Screen name={routes.CheckingIn} component={App.CheckingIn} />
+      <AppStack.Screen
+        name={routes.CheckingInRespond}
+        component={App.CheckingInRespond}
+      />
+      <AppStack.Screen
+        name={routes.CheckInSchedule}
+        component={App.CheckInSchedule}
+      />
       <AppStack.Screen name={routes.AppSettings} component={App.AppSettings} />
       <AppStack.Screen name={routes.EditProfile} component={App.EditProfile} />
     </AppStack.Navigator>

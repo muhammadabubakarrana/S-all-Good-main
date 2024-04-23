@@ -504,7 +504,7 @@ export const BottomModal = ({
     </Modals.PopupPrimary>
   );
 };
-export const CheckInSchedule = ({
+export const CheckInScheduleWrapper = ({
   onPressEdit,
   heading,
   para,
@@ -523,7 +523,7 @@ export const CheckInSchedule = ({
         borderRadius: sizes.cardRadius,
         borderWidth: 0.5,
         borderColor: colors.grayLight,
-        marginBottom: responsiveHeight(2),
+        marginBottom: responsiveHeight(1.5),
       }}>
       {!dontShowTimeAndDuration && (
         <Wrapper flexDirectionRow alignItemsCenter justifyContentSpaceBetween>
@@ -789,15 +789,87 @@ export const RenderResponseRecievedImage = ({img, txt, bgColor}) => {
 //     </Wrapper>
 //   );
 // };
+export const RecipientOrViewer = ({
+  name,
+  userName,
+  onPressButton,
+  onPressIcon,
+  image,
+  iconName,
+  iconType,
+  iconSize,
+  iconStyle,
+  iconColor,
+  isViewer,
+}) => {
+  return (
+    <Wrapper
+      marginHorizontalSmall
+      style={{
+        borderRadius: 48,
+        borderWidth: 0.5,
+        borderColor: colors.grayLight,
+      }}
+      justifyContentSpaceBetween
+      flexDirectionRow
+      alignItemsCenter
+      paddingHorizontalSmall
+      paddingVerticalSmall>
+      <Wrapper flexDirectionRow alignItemsCenter>
+        <Images.Round source={{uri: image}} />
+        <Spacer horizontal isSmall />
+        <Wrapper>
+          <Text isMediumFont isMedium>
+            {name}
+          </Text>
+          <Text style={{opacity: 0.75}} isRegularFont isRegular>
+            {userName}
+          </Text>
+        </Wrapper>
+      </Wrapper>
+
+      <Wrapper flexDirectionRow alignItemsCenter>
+        <Buttons.ColoredSmall
+          // onPress={onPressLink}
+          buttonStyle={{
+            backgroundColor: isViewer ? colors.primary : colors.orange,
+            paddingHorizontal: responsiveWidth(2),
+          }}
+          text={isViewer ? 'Viewer' : 'Recipient'}
+        />
+        <Spacer horizontal isSmall />
+        <TouchableOpacity onPress={onPressIcon}>
+          <Icon
+            name={
+              iconName
+                ? iconName
+                : isViewer
+                ? 'delete-outline'
+                : 'swap-horizontal'
+            }
+            type={iconType ? iconType : 'material-community'}
+            size={iconSize ? iconSize : sizes.icons.medium}
+            color={iconColor}
+            iconStyle={[{marginRight: responsiveWidth(2)}, iconStyle]}
+          />
+        </TouchableOpacity>
+      </Wrapper>
+    </Wrapper>
+  );
+};
 export const RenderLineWithVerticalBase = ({
   UpperSpaceBase,
   LowerSpaceBase,
   BothSpaceBase,
+  width,
 }) => {
   return (
     <Wrapper>
       {(UpperSpaceBase || BothSpaceBase) && <Spacer isBasic />}
-      <Lines.Horizontal style={{alignSelf: 'center'}} width={'88%'} />
+      <Lines.Horizontal
+        style={{alignSelf: 'center'}}
+        width={width ? width : '88%'}
+      />
       {(LowerSpaceBase || BothSpaceBase) && <Spacer isBasic />}
     </Wrapper>
   );

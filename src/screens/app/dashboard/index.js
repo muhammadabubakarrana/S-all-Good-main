@@ -7,13 +7,21 @@ import {
   Spacer,
   Lines,
   ScrollViews,
+  Buttons,
+  ArrowRightButton,
+  BottomModal,
+  CheckInScheduleWrapper,
 } from '../../../components';
 import {
   LinkedRecipientContacts,
-  RespondToCheckIn,
+  RespondToCheckInData,
+  appImages,
   colors,
   responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
   routes,
+  sizes,
 } from '../../../services';
 import {navigate} from '../../../navigation/rootNavigation';
 import {useHooks} from './hooks';
@@ -21,6 +29,9 @@ import {Icon} from '@rneui/base';
 import {TouchableOpacity} from 'react-native';
 
 export default function Index() {
+  const {mode, HandleMode, HandleOpenCheckInModal, openCheckInInfoModal, data} =
+    useHooks();
+
   return (
     <Wrapper isMain>
       <Spacer isStatusBarHeigt />
@@ -29,32 +40,200 @@ export default function Index() {
         {/* <Spacer isSmall /> */}
         <Wrapper marginHorizontalBase marginVerticalBase>
           <Text isMediumTitle isBoldFont>
-            Respond to Check-in
+            Dashboard
           </Text>
         </Wrapper>
 
+        <Spacer isSmall />
+        <Wrapper marginHorizontalBase>
+          <Text isTinyTitle isMediumFont>
+            Check-in Overview
+          </Text>
+        </Wrapper>
+        <Spacer isTiny />
+
+        <Wrapper marginHorizontalBase flexDirectionRow alignItemsCenter>
+          {mode === 'Today' ? (
+            <Buttons.ColoredSmall
+              onPress={() => HandleMode('Today')}
+              text={'Today'}
+            />
+          ) : (
+            <Buttons.BorderedSmall
+              onPress={() => HandleMode('Today')}
+              text={'Today'}
+            />
+          )}
+
+          <Spacer isTiny horizontal />
+          {mode === 'This Week' ? (
+            <Buttons.ColoredSmall
+              onPress={() => HandleMode('This Week')}
+              text={'This Week'}
+            />
+          ) : (
+            <Buttons.BorderedSmall
+              onPress={() => HandleMode('This Week')}
+              text={'This Week'}
+            />
+          )}
+
+          <Spacer isTiny horizontal />
+          {mode === 'This Month' ? (
+            <Buttons.ColoredSmall
+              onPress={() => HandleMode('This Month')}
+              text={'This Month'}
+            />
+          ) : (
+            <Buttons.BorderedSmall
+              onPress={() => HandleMode('This Month')}
+              text={'This Month'}
+            />
+          )}
+        </Wrapper>
+        <Spacer isSmall />
+        <Wrapper
+          justifyContentCenter
+          alignItemsCenter
+          flexDirectionRow
+          marginHorizontalBase>
+          {data.map((item, index) => (
+            <Wrapper
+              backgroundColor={colors.secondary}
+              paddingHorizontalMedium
+              paddingVerticalSmall
+              style={{borderRadius: 12, marginRight: responsiveWidth(1)}}
+              key={index}>
+              <Wrapper alignItemsCenter paddingHorizontalTiny>
+                <Text
+                  isBoldFont
+                  style={{
+                    fontSize: responsiveFontSize(48),
+                    color:
+                      index == 0
+                        ? colors.primary
+                        : index == 1
+                        ? colors.orangeLight
+                        : index == 2
+                        ? colors.darkRed
+                        : null,
+                  }}>
+                  {item.value}
+                </Text>
+                <Text isRegular>{item.status}</Text>
+              </Wrapper>
+            </Wrapper>
+          ))}
+        </Wrapper>
         <Spacer isBasic />
 
-        <Spacer isBasic />
-
-        {RespondToCheckIn.map((item, index) => (
-          <ItemContainer
-            onPressItem={() => navigate(routes.CheckingIn)}
-            key={index}
-            item={item}
-            index={index}
-            data={LinkedRecipientContacts}
-            iconName={'chevron-right'}
-          />
-        ))}
+        <Wrapper marginHorizontalBase>
+          <Text isTinyTitle isMediumFont>
+            Upcoming Check-ins
+          </Text>
+        </Wrapper>
+        <Spacer isSmall />
+        {RespondToCheckInData.map((item, index) =>
+          mode === 'Today' ? (
+            <ItemContainer
+              key={index}
+              item={item}
+              index={index}
+              iconName={'chevron-right'}
+              onPressItem={HandleOpenCheckInModal}
+            />
+          ) : null,
+        )}
         <Spacer isDoubleBase />
         <Spacer isDoubleBase />
         <Spacer isDoubleBase />
       </ScrollViews.WithKeyboardAvoidingView>
+      {/* Check-in Info Modal */}
+      <BottomModal
+        toggle={HandleOpenCheckInModal}
+        visible={openCheckInInfoModal}
+        heading={'Check-in Info'}>
+        <Spacer isBasic />
+        <BorderedWrapperCheckInInfo
+          name={'Jane Doe'}
+          CheckIn={'Reached Home Safely Check-in'}
+          time={'Today, 08:30 AM'}
+          Image={appImages.user1}
+        />
+        <Spacer isBasic />
+        <CheckInScheduleWrapper
+          dontShowEditIcon
+          heading={'Morning Check-In'}
+          para={
+            'Check to ensure that Mom has taken her morning medications and is feeling well. Remind her to have breakfast and ask if she needs any assistance with her morning routine.'
+          }
+          time={'10:00 AM'}
+          duration={'~30min'}
+        />
+        <Spacer isBasic />
+        <ArrowRightButton
+          onPress={() => navigate(routes.CheckingIn)}
+          text={'Check-in Now'}
+        />
+        <Spacer isTiny />
+        <ArrowRightButton
+          onPress={() => navigate(routes.CheckInSchedule)}
+          text={'Edit Check-in Schedule'}
+        />
+        <Spacer isTiny />
+        <ArrowRightButton
+          onPress={HandleOpenCheckInModal}
+          tintColor={colors.darkRed}
+          text={'Dismiss Check-in'}
+        />
+        <Spacer isDoubleBase />
+        <Spacer isBasic />
+      </BottomModal>
     </Wrapper>
   );
 }
 
+export const BorderedWrapperCheckInInfo = ({Image, name, CheckIn, time}) => {
+  return (
+    <Wrapper
+      isBorderedWrapper
+      style={[
+        {
+          borderWidth: 0.5,
+        },
+      ]}
+      paddingVerticalSmall
+      flexDirectionRow
+      alignItemsCenter>
+      <Wrapper
+        style={{
+          borderWidth: 1.5,
+          borderColor: colors.grayLight,
+          borderRadius: 100,
+        }}>
+        <Images.Round
+          size={responsiveFontSize(50)}
+          source={{uri: Image ? Image : appImages.user5}}
+        />
+      </Wrapper>
+      <Spacer horizontal isSmall />
+      <Wrapper>
+        <Text isMediumFont isMedium>
+          {CheckIn}
+        </Text>
+        <Wrapper flexDirectionRow alignItemsCenter>
+          <Text isRegularFont isRegular>
+            with {name}
+          </Text>
+          <Spacer isTiny horizontal />
+          <Text style={{opacity: 0.75}} isRegularFont isRegular>
+            {time}
+          </Text>
+        </Wrapper>
+      </Wrapper>
+    </Wrapper>
+  );
+};
 const ItemContainer = ({
   item,
   index,
@@ -82,12 +261,15 @@ const ItemContainer = ({
               <Text isMediumFont isMedium>
                 {item.response}
               </Text>
-              <Text isRegularFont isRegular>
-                {item.name} wants to check-in
-              </Text>
-              <Text style={{opacity: 0.75}} isRegularFont isRegular>
-                {item.time}
-              </Text>
+              <Wrapper flexDirectionRow alignItemsCenter>
+                <Text isRegularFont isRegular>
+                  with {item.name}
+                </Text>
+                <Spacer isTiny horizontal />
+                <Text style={{opacity: 0.75}} isRegularFont isRegular>
+                  {item.time}
+                </Text>
+              </Wrapper>
             </Wrapper>
           </Wrapper>
 

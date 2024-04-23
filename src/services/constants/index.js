@@ -36,7 +36,7 @@ export const routes = {
   Profile: 'Profile',
   LinkRecipient: 'Link Recipient',
   LinkViewer: 'Link Viewer',
-
+  CheckInSchedule: 'Check In Schedule',
   RecipientContacts: 'Recipient Contacts',
   ManageSubscription: 'Manage Subscription',
   smartFoodJournal: 'smartFoodJournal',
@@ -49,6 +49,7 @@ export const routes = {
   Congratulations: 'Congratulations',
   RespondToCheckIn: 'Respond To CheckIn',
   CheckingIn: 'Checking In',
+  CheckingInRespond: 'CheckingInRespond',
   Dashboard: 'Dashboard',
   //common
   termsOfService: 'termsOfService',

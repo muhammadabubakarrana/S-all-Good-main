@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Wrapper,
   Text,
@@ -8,8 +8,10 @@ import {
   Buttons,
   Icons,
   Headers,
+  CustomBorderedWrapper,
   ScrollViews,
   BottomModal,
+  CustomInput,
   CheckInScheduleWrapper,
   RecipientOrViewer,
 } from '../../../components';
@@ -19,40 +21,35 @@ import {
   appSvgs,
   colors,
   responsiveFontSize,
+  responsiveHeight,
   responsiveWidth,
   routes,
   sizes,
 } from '../../../services';
 import {navigate} from '../../../navigation/rootNavigation';
 import {Icon} from '@rneui/base';
-import {TouchableOpacity} from 'react-native';
+import {Pressable, StyleSheet, TouchableOpacity} from 'react-native';
 import {useHooks} from './hooks';
 
 export default function Index(props) {
-  const {HandleTestCheckInModal, openTestCheckInModal, HandleShow, show} =
-    useHooks();
+  const {
+    // HandleTestCheckInModal,
+    // openTestCheckInModal,
+    // HandleShow,
+    // show,
+  } = useHooks();
 
   return (
     <Wrapper isMain>
       <Headers.Primary
         darkBar
         invertColors
-        title={'Schedule Check-in Time'}
+        title={'Check-in Schedule'}
         showBackArrow
-        titleStyle={{
-          marginLeft: responsiveWidth(4),
-          width: responsiveWidth(75),
-        }}
         borderBottomWidth
-        isClose
       />
       <ScrollViews.WithKeyboardAvoidingView>
-        <Wrapper marginVerticalSmall alignItemsCenter>
-          <Icons.Svg
-            svg={appSvgs.scheduleTime}
-            size={responsiveFontSize(110)}
-          />
-        </Wrapper>
+        <Spacer isBasic />
         <Wrapper marginHorizontalTiny>
           <Wrapper marginHorizontalSmall>
             <Text alignTextCenter isRegularFont isMedium>
@@ -69,21 +66,25 @@ export default function Index(props) {
           image={appImages.user1}
         />
         <Spacer isSmall />
-        {!show && (
-          <RecipientOrViewer
-            onPressIcon={HandleShow}
-            name={'Kathy Pacheco'}
-            userName={'BenjaminWilson87'}
-            isViewer
-            // buttonText={'Recipient'}
-            iconColor={colors.darkRed}
-            image={appImages.user5}
-          />
-        )}
 
-        {show && (
-          <>
-            <Spacer isSmall />
+        <RecipientOrViewer
+          //   onPressIcon={HandleShow}
+          name={'Kathy Pacheco'}
+          userName={'BenjaminWilson87'}
+          isViewer
+          // buttonText={'Recipient'}
+          iconColor={colors.darkRed}
+          image={appImages.user5}
+        />
+        <Spacer isBasic />
+        <CustomInput
+          left
+          iconNameRight={'close'}
+          iconTypeRight={'material-community'}
+          placeholder={'Search...'}
+        />
+
+        {/* <Spacer isSmall />
             <Buttons.Bordered
               onPress={() => navigate(routes.LinkViewer)}
               iconName={'eye'}
@@ -91,12 +92,16 @@ export default function Index(props) {
               buttonStyle={{borderStyle: 'dashed', borderRadius: 48}}
               // buttonColor={colors.appTextColor3}
               text={'Link Viewer'}
-            />
-          </>
-        )}
+            /> */}
+
         <Spacer isBasic />
         <Buttons.Bordered
-          onPress={() => navigate(routes.common, {screen: routes.AddTimeSlot})}
+          onPress={() =>
+            navigate(routes.common, {
+              screen: routes.AddTimeSlot,
+              params: {showQuickResponse: true},
+            })
+          }
           iconName={'alarm-plus'}
           tintColor={colors.appTextColor3}
           buttonStyle={{borderStyle: 'dashed'}}
@@ -109,7 +114,10 @@ export default function Index(props) {
           return (
             <CheckInScheduleWrapper
               onPressEdit={() =>
-                navigate(routes.common, {screen: routes.EditTimeSlot})
+                navigate(routes.common, {
+                  screen: routes.EditTimeSlot,
+                  params: {showQuickResponse: true},
+                })
               }
               key={index}
               heading={heading}
@@ -121,31 +129,8 @@ export default function Index(props) {
         })}
         <Spacer isSmall />
 
-        <Buttons.Colored
-          onPress={HandleTestCheckInModal}
-          buttonColor={colors.primary}
-          text={'Continue'}
-        />
-
-        {/* checkIn wrapper */}
         <Spacer isMedium />
       </ScrollViews.WithKeyboardAvoidingView>
-      {/* Test Check-in Modal */}
-      <BottomModal
-        buttonText1={'Test Check-in with John'}
-        buttonText2={'Skip for now'}
-        SvgIcon={appSvgs.testCheckIn}
-        onPressButton1={() => navigate(routes.TestingCheckIn)}
-        onPressButton2={HandleTestCheckInModal}
-        toggle={HandleTestCheckInModal}
-        visible={openTestCheckInModal}
-        paraContainerStyle={{marginHorizontal: sizes.marginHorizontal}}
-        heading={'Test Check-In'}
-        para={
-          'Would you like to conduct a test check-in to ensure everything works properly between you and your loved ones?'
-        }>
-        <Spacer isBasic />
-      </BottomModal>
     </Wrapper>
   );
 }

@@ -30,22 +30,25 @@ import {
 import {
   AppSettings,
   ChangePaymentMethod,
+  CheckInSchedule,
   CheckingIn,
+  Dashboard,
   EditProfile,
   LinkRecipient,
   ManageSubscription,
   Notifications,
   Profile,
   RecipientContacts,
-  ResponsdToCheckIn,
+  RespondToCheckIn,
   ScheduleCheckInTime,
 } from './src/screens/app';
+
 export default function App() {
   return (
     <Provider store={store}>
       <SafeAreaProvider style={{flex: 1}}>
         <Navigation />
-        {/* <CheckingIn /> */}
+        {/* <CheckInSchedule /> */}
       </SafeAreaProvider>
     </Provider>
   );

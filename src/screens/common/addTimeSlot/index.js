@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   Text,
   Buttons,
@@ -11,6 +11,7 @@ import {
   RowInputs,
   RowButton,
   Lines,
+  RenderLineWithVerticalBase,
 } from '../../../components';
 import {
   responsiveFontSize,
@@ -25,8 +26,10 @@ import {
 import {useHooks} from './hooks';
 import {goBack, navigate} from '../../../navigation/rootNavigation';
 import {TextInput} from 'react-native';
-export default function Index() {
+export default function Index({route}) {
   const {accepted, setAccepted} = useHooks();
+  const previousScreenData = route.params;
+
   return (
     <Wrapper isMain style={[{}]}>
       <ScrollViews.KeyboardAvoiding>
@@ -54,10 +57,21 @@ export default function Index() {
           />
           <Spacer isSmall />
           <RenderOtherNotes />
-
-          <Spacer isBasic />
-          <Lines.Horizontal style={{alignSelf: 'center'}} width={'90%'} />
-          <Spacer isBasic />
+          <RenderLineWithVerticalBase BothSpaceBase />
+          {previousScreenData?.showQuickResponse ? (
+            <>
+              <CustomInput
+                title={'Quick Response 01'}
+                placeholder={'Search...'}
+              />
+              <Spacer isSmall />
+              <CustomInput
+                title={'Quick Response 02'}
+                placeholder={'Search...'}
+              />
+              <RenderLineWithVerticalBase BothSpaceBase />
+            </>
+          ) : null}
           <Wrapper alignItemsCenter>
             <RowButton
               //  onPress2={HandleUnlinkContactModal}

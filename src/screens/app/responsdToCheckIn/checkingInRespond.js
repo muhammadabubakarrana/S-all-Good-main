@@ -11,7 +11,7 @@ import {
   RenderCirclesWithImage,
   RenderResponseRecievedImage,
   Icons,
-  CheckInSchedule,
+  CheckInScheduleWrapper,
 } from '../../../components';
 import {
   appImages,
@@ -41,7 +41,7 @@ export default function Index() {
       <ScrollViews.WithKeyboardAvoidingView>
         <Spacer isBasic />
 
-        <CheckInSchedule
+        <CheckInScheduleWrapper
           dontShowEditIcon
           heading={'Morning Check-In'}
           para={

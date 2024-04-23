@@ -28,9 +28,6 @@ import {Icon} from '@rneui/base';
 export default function Index(props) {
   const [isActiveCondition, setIsActiveCondition] = useState(null);
   const previousScreenData = props.route.params;
-  useEffect(() => {
-    console.log(previousScreenData);
-  }, []);
 
   return (
     <Wrapper isMain style={[{}]}>

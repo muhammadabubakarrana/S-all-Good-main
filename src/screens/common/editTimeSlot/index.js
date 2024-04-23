@@ -1,19 +1,16 @@
 import React from 'react';
 import {
   Text,
-  Buttons,
   ScrollViews,
   Wrapper,
   Spacer,
   Headers,
   CustomInput,
-  Icons,
   RowInputs,
   RowButton,
-  Lines,
   BottomModal,
-  CheckInSchedule,
   RenderLineWithVerticalBase,
+  CheckInScheduleWrapper,
 } from '../../../components';
 import {
   responsiveFontSize,
@@ -28,8 +25,9 @@ import {
 import {useHooks} from './hooks';
 import {goBack, navigate} from '../../../navigation/rootNavigation';
 import {TextInput} from 'react-native';
-export default function Index() {
+export default function Index({route}) {
   const {openDeleteModal, HandleDeleteModal} = useHooks();
+  const previousScreenData = route.params;
   return (
     <Wrapper isMain style={[{}]}>
       <ScrollViews.KeyboardAvoiding>
@@ -58,6 +56,20 @@ export default function Index() {
           <Spacer isSmall />
           <RenderOtherNotes />
           <RenderLineWithVerticalBase BothSpaceBase />
+          {previousScreenData?.showQuickResponse ? (
+            <>
+              <CustomInput
+                title={'Quick Response 01'}
+                placeholder={'Search...'}
+              />
+              <Spacer isSmall />
+              <CustomInput
+                title={'Quick Response 02'}
+                placeholder={'Search...'}
+              />
+              <RenderLineWithVerticalBase BothSpaceBase />
+            </>
+          ) : null}
           <Wrapper alignItemsCenter>
             <RowButton
               iconNameLeftInput={'delete'}
@@ -84,7 +96,7 @@ export default function Index() {
         para={'Do you really want to delete this time slot?'}
         heading={'Delete Time Slot'}>
         <Spacer isBasic />
-        <CheckInSchedule
+        <CheckInScheduleWrapper
           dontShowEditIcon
           heading={'Morning Check-In'}
           para={
